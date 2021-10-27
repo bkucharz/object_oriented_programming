@@ -16,17 +16,11 @@ public class Vector2d {
     }
 
     boolean precedes(Vector2d other){
-        if(this.x <= other.x && this.y <= other.y){
-            return true;
-        }
-        return false;
+        return this.x <= other.x && this.y <= other.y;
     }
 
     boolean follows(Vector2d other){
-        if(this.x >= other.x && this.y >= other.y){
-            return true;
-        }
-        return false;
+        return this.x >= other.x && this.y >= other.y;
     }
 
     public Vector2d upperRight(Vector2d other){
@@ -54,10 +48,7 @@ public class Vector2d {
             return false;
         Vector2d that = (Vector2d) other;
 
-        if(this.x == that.x && this.y == that.y){
-            return true;
-        }
-        return false;
+        return this.x == that.x && this.y == that.y;
     }
 
 

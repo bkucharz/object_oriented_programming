@@ -1,12 +1,12 @@
 package agh.ics.oop;
 
-import static agh.ics.oop.Direction.*;
+import static agh.ics.oop.MoveDirection.*;
 
 public class World {
-    public static void run(Direction[] arguments){
+    public static void run(MoveDirection[] arguments){
         System.out.println("Start");
 
-        for (Direction dir : arguments){
+        for (MoveDirection dir : arguments){
             if (dir == null){
                 continue;
             }
@@ -21,9 +21,9 @@ public class World {
         System.out.println("Stop");
     }
 
-    public static Direction[] convertToEnum(String[] strings){
+    public static MoveDirection[] convertToEnum(String[] strings){
         int n = strings.length;
-        Direction[] converted = new Direction[n];
+        MoveDirection[] converted = new MoveDirection[n];
         for(int i = 0; i < n; i++){
             converted[i] = switch(strings[i]){
                 case "f" -> FORWARD;
@@ -37,28 +37,13 @@ public class World {
     }
 
     public static void main(String[] args){
-        System.out.println("System wystartował");
-        Direction[] directions = convertToEnum(args);
-        run(directions);
-        System.out.println("System zakonczył działanie");
-
-        Vector2d position1 = new Vector2d(1,2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
-
-        MapDirection dir = MapDirection.NORTH;
-        System.out.println(dir);
-        dir = dir.previous();
-        System.out.println(dir);
-        dir = dir.previous();
-        System.out.println(dir);
-        dir = dir.previous();
-        System.out.println(dir);
-        dir = dir.previous();
-        System.out.println(dir);
-
+        Animal animal1 = new Animal();
+        System.out.println(animal1);
+        OptionsParser parser = new OptionsParser();
+        for(MoveDirection option :  parser.parse(args)){
+            animal1.move(option);
+            System.out.println(animal1);
+        }
 
     }
 }

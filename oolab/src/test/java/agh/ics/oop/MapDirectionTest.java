@@ -7,18 +7,26 @@ public class MapDirectionTest {
     @Test
     public void testNext(){
         MapDirection dir = MapDirection.NORTH;
-        for (int i = 0; i < 4; i++){
-            Assertions.assertEquals(dir, MapDirection.values()[i%4]);
-            dir = dir.next();
-        }
+        dir = dir.next();
+        Assertions.assertEquals(dir, MapDirection.EAST);
+        dir = dir.next();
+        Assertions.assertEquals(dir, MapDirection.SOUTH);
+        dir = dir.next();
+        Assertions.assertEquals(dir, MapDirection.WEST);
+        dir = dir.next();
+        Assertions.assertEquals(dir, MapDirection.NORTH);
     }
 
     @Test
     public void testPrevious(){
         MapDirection dir = MapDirection.NORTH;
-        for (int i = 4; i > 0; i--){
-            Assertions.assertEquals(dir, MapDirection.values()[i%4]);
-            dir = dir.previous();
-        }
+        dir = dir.previous();
+        Assertions.assertEquals(dir, MapDirection.WEST);
+        dir = dir.previous();
+        Assertions.assertEquals(dir, MapDirection.SOUTH);
+        dir = dir.previous();
+        Assertions.assertEquals(dir, MapDirection.EAST);
+        dir = dir.previous();
+        Assertions.assertEquals(dir, MapDirection.NORTH);
     }
 }
