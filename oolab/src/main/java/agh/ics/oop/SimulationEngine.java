@@ -26,6 +26,7 @@ public class SimulationEngine implements IEngine{
                 if(i >= moves.length){return;}
                 animal.move(moves[i]);
                 i++;
+                System.out.println(map);
             }
         }
     }
