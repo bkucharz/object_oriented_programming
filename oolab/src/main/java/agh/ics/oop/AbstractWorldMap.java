@@ -1,38 +1,34 @@
 package agh.ics.oop;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-abstract class AbstractWorldMap implements IWorldMap{
+abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
     protected Vector2d upperRightCorner;
     protected Vector2d lowerLeftCorner;
-    protected List<Animal> animals = new LinkedList<>();
+    protected Map<Vector2d, Animal> animals = new LinkedHashMap<>();
     protected MapVisualizer visualizer = new MapVisualizer(this);
 
 
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        animals.put(newPosition, animals.remove(oldPosition));
+    }
+
     public boolean place(Animal animal){
         if(canMoveTo(animal.getPosition())){
-            animals.add(animal);
+            animals.put(animal.getPosition(), animal);
             return true;
         }
         return false;
     }
 
     public boolean isOccupied(Vector2d position){
-        for(Animal animal : animals){
-            if(animal.getPosition().equals(position)){
-                return true;
-            }
+        if(animals.containsKey(position)){
+            return true;
         }
         return false;
     }
 
     public Object objectAt(Vector2d position){
-        for(Animal animal : animals){
-            if(animal.getPosition().equals(position)){
-                return animal;
-            }
-        }
-        return null;
+        return animals.get(position);
     }
 }

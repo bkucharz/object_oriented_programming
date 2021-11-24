@@ -1,11 +1,9 @@
 package agh.ics.oop;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GrassField extends AbstractWorldMap{
-    private List<Grass> grasses = new LinkedList<>();
+    private Map<Vector2d, Grass> grasses = new LinkedHashMap<>();
     private int width;
 
 
@@ -25,7 +23,7 @@ public class GrassField extends AbstractWorldMap{
 
                 Vector2d position = new Vector2d(x, y);
                 if (!(objectAt(position) instanceof Grass)){
-                    this.grasses.add((new Grass(position)));
+                    this.grasses.put(position, (new Grass(position)));
                     break;
                 }
             }
@@ -36,25 +34,33 @@ public class GrassField extends AbstractWorldMap{
         return !isOccupied(position) || (objectAt(position) instanceof Grass);
     }
 
-
-    public Object objectAt(Vector2d position){
-        Object temp = super.objectAt(position);
-
-        if(temp == null){
-            for(Grass grass : grasses){
-                if(grass.getPosition().equals(position)){
-                    return grass;
-                }
+    public boolean isOccupied(Vector2d position) {
+        boolean temp = super.isOccupied(position);
+        if(!temp){
+            if(grasses.containsKey(position)){
+                return true;
             }
         }
         return temp;
     }
 
-    public String toString(){
-        for(Animal animal : animals){
-            this.upperRightCorner = upperRightCorner.upperRight(animal.getPosition());
-            this.lowerLeftCorner = lowerLeftCorner.lowerLeft(animal.getPosition());
+    public Object objectAt(Vector2d position){
+        Object temp = super.objectAt(position);
+
+        if(temp == null){
+            return grasses.get(position);
         }
+        return temp;
+    }
+
+    public String toString(){
         return visualizer.draw(lowerLeftCorner, upperRightCorner);
+    }
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        super.positionChanged(oldPosition, newPosition);
+        this.upperRightCorner = upperRightCorner.upperRight(newPosition);
+        this.lowerLeftCorner = lowerLeftCorner.lowerLeft(newPosition);
     }
 }
