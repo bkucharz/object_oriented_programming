@@ -5,13 +5,13 @@ public class Animal {
     private Vector2d position;
     private IWorldMap map;
 
-    public Animal(){
+    public Animal(){    // ten konstruktor nie ma prawa bytu
         this.orientation = MapDirection.NORTH;
     }
 
     public Animal(IWorldMap map){
         this.map = map;
-        this.orientation = MapDirection.NORTH;
+        this.orientation = MapDirection.NORTH;  // a jaka jest pozycja zwierzęcia?
     }
 
     public Animal(IWorldMap map, Vector2d initialPosition){

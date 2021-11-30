@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class GrassField extends AbstractWorldMap{
     private List<Grass> grasses = new LinkedList<>();
-    private int width;
+    private int width;  // myląca nazwa
 
 
     public GrassField(int numberOfGrass){
@@ -38,7 +38,7 @@ public class GrassField extends AbstractWorldMap{
 
 
     public Object objectAt(Vector2d position){
-        Object temp = super.objectAt(position);
+        Object temp = super.objectAt(position); // mało mówiąca nazwa
 
         if(temp == null){
             for(Grass grass : grasses){
@@ -52,7 +52,7 @@ public class GrassField extends AbstractWorldMap{
 
     public String toString(){
         for(Animal animal : animals){
-            this.upperRightCorner = upperRightCorner.upperRight(animal.getPosition());
+            this.upperRightCorner = upperRightCorner.upperRight(animal.getPosition());  // mapa się rozszerza, ale nie zwęża
             this.lowerLeftCorner = lowerLeftCorner.lowerLeft(animal.getPosition());
         }
         return visualizer.draw(lowerLeftCorner, upperRightCorner);

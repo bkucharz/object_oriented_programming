@@ -35,4 +35,7 @@ abstract class AbstractWorldMap implements IWorldMap{
         }
         return null;
     }
+
+    // a gdzie toString?
+    // canMoveTo się nie dało tu zaimplementować?
 }
