@@ -55,13 +55,15 @@ public class GrassFieldTest {
         map.place(a2);
         Animal a3 = new Animal(map, new Vector2d(2, 1));
         map.place(a3);
-        Animal a4 = new Animal(map, new Vector2d(2, 1));
-        map.place(a4);
+        assertThrows(IllegalArgumentException.class, () -> {
+                Animal a4 = new Animal(map, new Vector2d(2, 1));
+                map.place(a4);
+        });
+
+
 
         assertEquals(map.objectAt(new Vector2d(1, 6)), a1);
         assertEquals(map.objectAt(new Vector2d(9, 5)), a2);
         assertEquals(map.objectAt(new Vector2d(2, 1)), a3);
-
-        assertNotEquals(map.objectAt(new Vector2d(2, 1)), a4);
     }
 }

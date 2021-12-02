@@ -11,8 +11,8 @@ class RectangularMapTest {
         assertTrue(map.place(new Animal(map, new Vector2d(2, 2))));
         assertTrue(map.place(new Animal(map, new Vector2d(3, 4))));
 
-        assertFalse(map.place(new Animal(map, new Vector2d(5, 1))));
-        assertFalse(map.place(new Animal(map, new Vector2d(4, 5))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map, new Vector2d(5, 1))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map, new Vector2d(4, 5))));
     }
 
     @Test
@@ -54,13 +54,13 @@ class RectangularMapTest {
         map.place(a2);
         Animal a3 = new Animal(map, new Vector2d(2, 1));
         map.place(a3);
-        Animal a4 = new Animal(map, new Vector2d(2, 1));
-        map.place(a4);
+        assertThrows(IllegalArgumentException.class, () -> {
+            Animal a4 = new Animal(map, new Vector2d(2, 1));
+            map.place(a4);
+        });
 
         assertEquals(map.objectAt(new Vector2d(1, 5)), a1);
         assertEquals(map.objectAt(new Vector2d(9, 5)), a2);
         assertEquals(map.objectAt(new Vector2d(2, 1)), a3);
-
-        assertNotEquals(map.objectAt(new Vector2d(2, 1)), a4);
     }
 }

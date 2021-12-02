@@ -20,6 +20,8 @@ public class OptionsParser {
 
                 case "r":
                 case "right": directions[i] = MoveDirection.RIGHT; i++;break;
+
+                default: throw new IllegalArgumentException("\"" + dir + "\"" + " is not legal move specification");
             }
         }
         return Arrays.copyOfRange(directions, 0, i);

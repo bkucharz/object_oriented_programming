@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Assertions;
 public class AnimalTest {
     @Test
     public void orientation(){
-        Animal animal1 = new Animal();
+        Animal animal1 = new Animal(new RectangularMap(5, 5));
         OptionsParser parser = new OptionsParser();
 
-        MoveDirection[] moves1 = parser.parse(new String[]{"left", "l", "", "xc", "right", "r", "r", "r"});
+        MoveDirection[] moves1 = parser.parse(new String[]{"left", "l", "right", "r", "right", "r"});
 
         animal1.move(moves1[0]);
         Assertions.assertEquals(animal1.getOrientation(), MapDirection.WEST);
@@ -29,7 +29,7 @@ public class AnimalTest {
     @Test
     public void movement(){
         OptionsParser parser = new OptionsParser();
-        Animal animal1 = new Animal();
+        Animal animal1 = new Animal(new RectangularMap(5, 5));
         MoveDirection[] moves1 = parser.parse(new String[]{"r", "forward", "f", "f", "l", "f", "f", "f"});
 
         animal1.move(moves1[0]);
@@ -51,7 +51,7 @@ public class AnimalTest {
         animal1.move(moves1[7]);
         Assertions.assertEquals(animal1.getPosition(), new Vector2d(4, 4));
 
-        animal1 = new Animal();
+        animal1 = new Animal(new RectangularMap(5, 5));
         moves1 = parser.parse(new String[]{"l", "forward", "f", "f", "r", "b", "b", "b"});
 
         animal1.move(moves1[0]);

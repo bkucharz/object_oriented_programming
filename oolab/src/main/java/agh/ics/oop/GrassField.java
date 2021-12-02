@@ -8,12 +8,10 @@ public class GrassField extends AbstractWorldMap{
 
 
     public GrassField(int numberOfGrass){
-        this(numberOfGrass, 0, 0);
-    }
-    public GrassField(int numberOfGrass, int x0, int y0){
-        this.lowerLeftCorner = new Vector2d(x0, y0);
+        this.lowerLeftCorner = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
+        this.upperRightCorner = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
+
         this.width = (int) Math.sqrt(numberOfGrass * 10);
-        this.upperRightCorner = new Vector2d(width, width);
 
         Random random = new Random();
         for(int i=0; i < numberOfGrass; i++){
@@ -23,7 +21,8 @@ public class GrassField extends AbstractWorldMap{
 
                 Vector2d position = new Vector2d(x, y);
                 if (!(objectAt(position) instanceof Grass)){
-                    this.grasses.put(position, (new Grass(position)));
+                    this.grasses.put(position, new Grass(position));
+                    boundaries.put(new Grass(position));
                     break;
                 }
             }
@@ -54,13 +53,6 @@ public class GrassField extends AbstractWorldMap{
     }
 
     public String toString(){
-        return visualizer.draw(lowerLeftCorner, upperRightCorner);
-    }
-
-    @Override
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        super.positionChanged(oldPosition, newPosition);
-        this.upperRightCorner = upperRightCorner.upperRight(newPosition);
-        this.lowerLeftCorner = lowerLeftCorner.lowerLeft(newPosition);
+        return visualizer.draw(boundaries.getLowerLeftCorner(), boundaries.getUpperRightCorner());
     }
 }
