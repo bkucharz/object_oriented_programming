@@ -19,7 +19,7 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
             animals.put(animal.getPosition(), animal);
             animal.addObserver(this);
             animal.addObserver(boundaries);
-            boundaries.put(animal.clone());
+            boundaries.put(animal.getPosition(), animal.getClass());
             return true;
         }
         throw new IllegalArgumentException("Cannot place animal at position "+  animal.getPosition());

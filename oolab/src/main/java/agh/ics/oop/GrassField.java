@@ -22,7 +22,7 @@ public class GrassField extends AbstractWorldMap{
                 Vector2d position = new Vector2d(x, y);
                 if (!(objectAt(position) instanceof Grass)){
                     this.grasses.put(position, new Grass(position));
-                    boundaries.put(new Grass(position));
+                    boundaries.put(position, Grass.class);
                     break;
                 }
             }

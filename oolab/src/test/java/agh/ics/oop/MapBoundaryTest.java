@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,32 +9,31 @@ public class MapBoundaryTest {
     public void set(){
         IWorldMap map = new GrassField(10);
         MapBoundary boundary = new MapBoundary(map);
-        Animal a = new Animal(map, new Vector2d(0, 0));
-        boundary.put(a);
-        boundary.put(new Animal(map, new Vector2d(2, 0)));
-        boundary.put(new Animal(map, new Vector2d(0, -1)));
-        boundary.put(new Animal(map, new Vector2d(2, 1)));
-        boundary.put(new Grass(new Vector2d(2, 1)));
+        boundary.put(new Vector2d(2, 0), Animal.class);
+        boundary.put(new Vector2d(0, -1), Animal.class);
+        boundary.put(new Vector2d(2, 1), Animal.class);
+        boundary.put(new Vector2d(2,1), Grass.class);
 
 
-        boundary.xAxis.remove(new Animal(map, new Vector2d(0, 0)));
-//        boundary.xAxis.remove(a);
-
-        for(IWorldMapElement element : boundary.xAxis){
-            System.out.print(element.getPosition() + ", ");
-        }
-
-        assertEquals(new Vector2d(0, -1), boundary.xAxis.first().getPosition());
-        assertEquals(new Vector2d(2, 1), boundary.xAxis.last().getPosition());
+        assertEquals(new Vector2d(0, -1), boundary.xAxis.first().getKey());
+        assertEquals(new Vector2d(2, 1), boundary.xAxis.last().getKey());
 
         boundary = new MapBoundary(map);
-        boundary.put(new Animal(map, new Vector2d(0, 0)));
-        boundary.put(new Animal(map, new Vector2d(0, 2)));
-        boundary.put(new Animal(map, new Vector2d(-1, 0)));
-        boundary.put(new Animal(map, new Vector2d(1, 2)));
+        boundary.put(new Vector2d(0, 0), Animal.class);
+        boundary.put(new Vector2d(0, 2), Animal.class);
+        boundary.put(new Vector2d(-1, 0), Animal.class);
+        boundary.put(new Vector2d(-1, 0), Animal.class);
+        boundary.put(new Vector2d(1,2), Grass.class);
 
-        assertEquals(new Vector2d(-1, 0), boundary.yAxis.first().getPosition());
-        assertEquals(new Vector2d(1, 2), boundary.yAxis.last().getPosition());
+        assertEquals(4, boundary.xAxis.size());
+        assertEquals(4, boundary.yAxis.size());
+
+        boundary.put(new Vector2d(-1, 0), Grass.class);
+        assertEquals(5, boundary.xAxis.size());
+        assertEquals(5, boundary.yAxis.size());
+
+        assertEquals(new Vector2d(-1, 0), boundary.yAxis.first().getKey());
+        assertEquals(new Vector2d(1, 2), boundary.yAxis.last().getKey());
 
     }
 }
