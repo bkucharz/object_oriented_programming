@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
 
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+
 import static agh.ics.oop.MoveDirection.*;
 
 public class World {
@@ -38,19 +41,9 @@ public class World {
     }
 
     public static void main(String[] args){
-        try {
-            args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f", "b", "b"};
-            MoveDirection[] directions = new OptionsParser().parse(args);
-            IWorldMap map = new GrassField(2);
-            Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-            IEngine engine = new SimulationEngine(directions, map, positions);
-            engine.run();
-        } catch (IllegalArgumentException ex){
-            System.out.println(ex);
-            return;
-        }
 
 
+        Application.launch(App.class, args);
 
 
     }

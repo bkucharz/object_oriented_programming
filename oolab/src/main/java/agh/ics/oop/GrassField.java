@@ -5,6 +5,7 @@ import java.util.*;
 public class GrassField extends AbstractWorldMap{
     private Map<Vector2d, Grass> grasses = new LinkedHashMap<>();
     private int width;
+    private MapBoundary boundaries = new MapBoundary(this);
 
 
     public GrassField(int numberOfGrass){
@@ -27,6 +28,14 @@ public class GrassField extends AbstractWorldMap{
                 }
             }
         }
+    }
+
+    public boolean place(Animal animal){
+        if(super.place(animal)){
+            animal.addObserver(boundaries);
+            boundaries.put(animal.getPosition(), animal.getClass());
+        }
+        return true;
     }
 
     public boolean canMoveTo(Vector2d position){
@@ -54,5 +63,13 @@ public class GrassField extends AbstractWorldMap{
 
     public String toString(){
         return visualizer.draw(boundaries.getLowerLeftCorner(), boundaries.getUpperRightCorner());
+    }
+
+    public Vector2d getUpperRightCorner(){
+        return boundaries.getUpperRightCorner();
+    }
+
+    public Vector2d getLowerLeftCorner(){
+        return boundaries.getLowerLeftCorner();
     }
 }
