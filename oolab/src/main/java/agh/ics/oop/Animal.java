@@ -60,6 +60,9 @@ public class Animal implements IWorldMapElement{
             position = updatedPosition;
             positionChanged(oldPosition, updatedPosition);
         }
+        else if(direction == MoveDirection.LEFT || direction == MoveDirection.RIGHT){
+            positionChanged(oldPosition, oldPosition);
+        }
     }
 
     public void addObserver(IPositionChangeObserver observer){
@@ -74,5 +77,16 @@ public class Animal implements IWorldMapElement{
         for(IPositionChangeObserver observer : observers){
             observer.positionChanged(oldPosition, newPosition);
         }
+    }
+
+    public String getImagePath(){
+        String path = "src/main/resources/";
+        String toAdd = switch (this.orientation){
+                case NORTH -> "up.png";
+                case EAST -> "right.png";
+                case SOUTH -> "down.png";
+                case WEST -> "left.png";
+            };
+        return path+toAdd;
     }
 }
