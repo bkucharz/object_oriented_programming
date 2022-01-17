@@ -17,7 +17,7 @@ public class Grass implements IWorldMapElement{
         return position;
     }
 
-    public int getEnergy() {
+    public int getEnergy() {    // dobra nazwa pola traci znaczenie, jak getter ma inną nazwę
         return nutritiousness;
     }
 

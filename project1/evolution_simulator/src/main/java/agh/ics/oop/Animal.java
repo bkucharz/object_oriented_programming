@@ -4,20 +4,20 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Animal implements IWorldMapElement{
-    private Vector2d position;
+    private Vector2d position;  // warto uporządkować pola tematycznie
     private int energy;
-    private final int[] dna;
+    private final int[] dna;    // przydałaby się osobna klasa + czemu Pan tu trzyma int'y skoro ma Pan MoveDirection?
     private MapDirection orientation;
     private final IWorldMap map;
     private final List<IAnimalObserver> observers = new ArrayList<>();
     private int age = 0;
     private int childNumber = 0;
     private final int dailyFatigue;
-    private final List<Integer> modeGenes;
-    private int deathDay = -1;
+    private final List<Integer> modeGenes;  // nie rozumiem nazwy
+    private int deathDay = -1;  // lepszy byłby Integer i ustawienie null
 
     public Animal(IWorldMap map, Vector2d initialPosition, int initialEnergy, int dailyFatigue, int[] dna){
-        this.dna = Arrays.copyOf(dna, 32);
+        this.dna = Arrays.copyOf(dna, 32);  // brak kontroli poprawności
         this.modeGenes = getMode(dna);
         this.dailyFatigue = dailyFatigue;
         this.map = map;
@@ -60,12 +60,12 @@ public class Animal implements IWorldMapElement{
     }
 
     public void move(){
-        Random random = new Random();
+        Random random = new Random();   // nowy obiekt co wywołanie
         MoveDirection direction = new OptionsParser().parse(dna[random.nextInt(32)]);
 
         orientation = switch (direction){
             case SLIGHT_RIGHT -> orientation.next();
-            case RIGHT-> orientation.next().next();
+            case RIGHT-> orientation.next().next(); // przydałaby się pętla
             case SHARP_RIGHT -> orientation.next().next().next();
             case SLIGHT_LEFT -> orientation.previous();
             case LEFT -> orientation.previous().previous();
@@ -108,7 +108,7 @@ public class Animal implements IWorldMapElement{
     }
 
 
-    public Animal procreate(Animal other){
+    public Animal procreate(Animal other){  // nie czytelniej zrobić metodę statyczną, przyjmującą dwa genotypy, albo konstruktor?
         Animal alfa;
         Animal beta;
         if(this.energy > other.energy){
@@ -123,7 +123,7 @@ public class Animal implements IWorldMapElement{
         int alfaGens = 32* alfa.energy/(alfa.energy + beta.energy);
         int betaGens = 32 - alfaGens;
 
-        Random random = new Random();
+        Random random = new Random();   // nowy obiekt co wywołanie
         int side = random.nextInt(2);
         int[] head;
         int[] tail;

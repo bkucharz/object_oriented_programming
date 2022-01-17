@@ -15,7 +15,7 @@ public class SimulationEngine implements Runnable, IEngine, IAnimalObserver{
     private int deadNum;
     private float sumDeadLifeTime;
     private boolean suspendFlag = false;
-    List<ISimulationObserver> observers = new LinkedList<>();
+    List<ISimulationObserver> observers = new LinkedList<>();   // czemu to nie jest prywatne?
 
 
     public SimulationEngine(AbstractWorldMap map, int initialPopulation, int initialGrassNumber, int startEnergy, int moveEnergy, int plantEnergy, boolean isMagic){
@@ -69,7 +69,7 @@ public class SimulationEngine implements Runnable, IEngine, IAnimalObserver{
                 }
             }
 
-            theGrimReaper();
+            theGrimReaper();    // brzmi jak nazwa zmiennej
             moveAll();
             map.feast();
             map.mating(startEnergy/2);

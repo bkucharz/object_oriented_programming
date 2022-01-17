@@ -1,7 +1,7 @@
 package agh.ics.oop;
 
 public enum MoveDirection {
-    FORWARD,
+    FORWARD,    // kolejność ma znaczenie
     BACKWARD,
     RIGHT,
     LEFT,

@@ -15,7 +15,7 @@ public class BoundedMap extends AbstractWorldMap{
     @Override
     public Vector2d onMapPosition(Vector2d wishedPosition) {
         int newX = Math.max(wishedPosition.x, lowerLeftCorner.x);
-        newX = Math.min(newX, upperRightCorner.x);
+        newX = Math.min(newX, upperRightCorner.x);  // czy na pewno tak to miało działać?
         int newY = Math.max(wishedPosition.y, lowerLeftCorner.y);
         newY = Math.min(newY, upperRightCorner.y);
         return new Vector2d(newX, newY);

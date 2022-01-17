@@ -14,7 +14,7 @@ public enum MapDirection {
     private final String stringRepr;
     private final Vector2d unitVector;
 
-    MapDirection(String repr, int x, int y){
+    MapDirection(String repr, int x, int y){    // lepiej od razu przyjmować wektor niż współrzędne
         stringRepr = repr;
         unitVector = new Vector2d(x, y);
     }

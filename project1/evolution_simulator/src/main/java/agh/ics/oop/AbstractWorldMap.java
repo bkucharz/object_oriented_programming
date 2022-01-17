@@ -35,7 +35,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IAnimalObserver {
     public void feast(){
         for(Vector2d position : animals.keySet()){
             if(grasses.get(position) != null){
-                Animal animal = (Animal) objectAt(position);
+                Animal animal = (Animal) objectAt(position);    // a jeśli zwierząt jest kilka?
                 animal.eat(grasses.get(position));
                 grasses.remove(position);
             }
@@ -67,7 +67,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IAnimalObserver {
         newAnimal.addObserver(this);
     }
 
-    public void checkPulse(Animal animal, Vector2d position){
+    public void checkPulse(Animal animal, Vector2d position){   // za miesiąc będzie Pan rozumiał tę nazwę? + dlaczego to jest metoda mapy?
         // removing dead animal from given position
         if (animal.getEnergy() <= 0){
             removeAnimal(animal, position);
